@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <a href="{% url 'index' %}">
+    <h1>Connexion</h1>
+    </a>
+  <form method="POST">
+      {% csrf_token %}
+      <p>
+          <label for="username">Nom d'utilisateur ou adresse mail</label>
+          <input id="username" type="text" name="username">
+      </p>
+      <p>
+          <label for="password">Mot de passe</label>
+          <input id="password" type="password" name="password">
+      </p>
+      <button type="submit">Connexion</button>
+  </form>
+
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+   {% if user.is_authenticated %}
+    {{ user.username }}
+    <a href="{% url 'logout' %}">Déconnexion</a>
+{% else %}
+    <a href="{% url 'login' %}">Connexion</a>
+    <a href="{% url 'signup' %}">S'inscrire</a>
+{% endif %}
+    {% if user.cart and not user.cart.ordered %}
+<p>
+    <a href="{% url 'cart' %}">Voir le panier ({{ user.cart.orders.count }})</a>
+</p>
+{% endif %}
+</head>
+
+<footer>
+
+    <a href="{% url 'index' %}"><h1>Accueil</h1></a>
+    <a href="{% url 'abonnement' %}"><h1>Abonnement</h1></a>
+    <a href="{% url 'CGV' %}"><h1>CGV</h1></a>
+
+</footer>
+
+{% for product in products %}
+
+<p class="sizeSmall">{{ product.name }}</p>
+
+    {% if product.thumbnail %}
+
+    <img src="{{ product.thumbnail.url }}" alt="{{ product.name }}" style="max-width: 75px;">
+    <a href="{{ product.get_absolute_url }}">Voir l'article</a>
+
+    {% endif %}
+{% endfor %}
+
+{% endblock %}
+
+</body>
+</html>
